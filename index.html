@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مقارنة أدوات الذكاء الاصطناعي</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+            direction: rtl;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 25px;
+            border-bottom: 5px solid #667eea;
+        }
+
+        .main-title {
+            font-size: 44px;
+            font-weight: 900;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+
+        .tables-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .table-card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 25px 25px 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-top: 8px solid;
+        }
+
+        .table-card.cat-1 {
+            border-top-color: #3498db;
+        }
+
+        .table-card.cat-2 {
+            border-top-color: #2ecc71;
+        }
+
+        .table-card.cat-3 {
+            border-top-color: #f39c12;
+        }
+
+        .table-title {
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .table-card.cat-1 .table-title {
+            color: #3498db;
+            border-bottom-color: #3498db;
+        }
+
+        .table-card.cat-2 .table-title {
+            color: #2ecc71;
+            border-bottom-color: #2ecc71;
+        }
+
+        .table-card.cat-3 .table-title {
+            color: #f39c12;
+            border-bottom-color: #f39c12;
+        }
+
+        .table-icon {
+            font-size: 30px;
+        }
+
+        .ai-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 15px;
+        }
+
+        .ai-table th,
+        .ai-table td {
+            padding: 12px 10px;
+            text-align: right;
+            border-bottom: 1px solid #ecf0f1;
+            vertical-align: top;
+        }
+
+        .ai-table th {
+            background: #f4f6fb;
+            color: #34495e;
+            font-weight: 800;
+            font-size: 15px;
+        }
+
+        .ai-table tr:nth-child(even) td {
+            background: #fbfdff;
+        }
+
+        .ai-table tr:nth-child(odd) td {
+            background: #ffffff;
+        }
+
+        .tool-name-cell {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .tool-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            font-size: 13px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .badge-chat {
+            background: linear-gradient(90deg, #3498db 0%, #2980b9 100%);
+        }
+
+        .badge-image {
+            background: linear-gradient(90deg, #2ecc71 0%, #27ae60 100%);
+        }
+
+        .badge-present {
+            background: linear-gradient(90deg, #f39c12 0%, #e67e22 100%);
+        }
+
+        .price-tag {
+            font-weight: 800;
+            color: #27ae60;
+        }
+
+        .price-note {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-top: 3px;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding-right: 15px;
+        }
+
+        .feature-list li {
+            position: relative;
+            margin-bottom: 4px;
+            color: #546e7a;
+            line-height: 1.5;
+        }
+
+        .feature-list li::before {
+            content: "•";
+            position: absolute;
+            right: -12px;
+            color: #667eea;
+            font-size: 14px;
+        }
+
+        .free-limit {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 45px;
+            padding-top: 25px;
+            border-top: 3px solid #ecf0f1;
+            color: #7f8c8d;
+            font-size: 15px;
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                padding: 30px 18px;
+            }
+
+            .main-title {
+                font-size: 32px;
+            }
+
+            .table-title {
+                font-size: 22px;
+            }
+
+            .ai-table th,
+            .ai-table td {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+        }
+
+        @media print {
+            body {
+                background: #ffffff;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header class="page-header">
+        <h1 class="main-title">مقارنة أدوات الذكاء الاصطناعي</h1>
+        <p class="subtitle">جداول تفاعلية لمقارنة الأسعار والإمكانيات والقيود لأشهر أدوات الذكاء الاصطناعي في المحادثة، الصور، والعروض التقديمية.</p>
+    </header>
+
+    <div class="tables-wrapper">
+
+        <!-- الجدول الأول: أدوات المحادثة وتوليد الأفكار -->
+        <section class="table-card cat-1">
+            <h2 class="table-title">
+                <span class="table-icon">💬</span>
+                أدوات المحادثة وتوليد الأفكار
+            </h2>
+            <table class="ai-table">
+                <thead>
+                <tr>
+                    <th>الأداة</th>
+                    <th>أقل باقة مدفوعة (شهرياً)</th>
+                    <th>الإمكانيات والخدمات</th>
+                    <th>حدود النسخة المجانية</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <div class="tool-name-cell">
+                            <span class="tool-badge badge-chat">C</span>
+                            <span>ChatGPT</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="price-tag">20$ تقريباً / شهر</div>
+                        <div class="price-note">خطة Plus للمستخدمين الأفراد.[web:3][web:14]</div>
+                    </td>
+                    <td>
+                        <ul class="feature-list">
+                            <li>وصول إلى نماذج متقدمة مع أداء أعلى وسرعة استجابة أفضل.[web:3][web:14]</li>
+                            <li>أولوية في طوابير الاستخدام مع ميزات إضافية مثل الذاكرة وبعض الأدوات المتقدمة حسب الخطة.[web:14]</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <span class="free-limit">
+                            عدد جلسات يومي محدود، نماذج أقل تقدماً، وأولوية أقل في الأوقات المزدحمة.[web:14]
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="tool-name-cell">
+                            <span class="tool-badge badge-chat">P</span>
+                            <span>Perplexity</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="price-tag">20$ تقريباً / شهر</div>
+                        <div class="price-note">خطة Pro الفردية.[web:7][web:15]</div>
+                    </td>
+                    <td>
+                        <ul class="feature-list">
+                            <li>نمودج بحث مدعوم بالذكاء الاصطناعي مع إجابات مستندة إلى مصادر مباشرة من الويب.[web:15]</li>
+                            <li>وصول إلى نماذج مميزة، رفع ملفات، وسياق أطول وعدد غير محدود تقريباً من عمليات البحث Pro.[web:15]</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <span class="free-limit">
+                            عدد محدود من الاستفسارات المتقدمة يومياً، نماذج أقل، وبعض القيود على حجم الملفات والسياق.[web:15]
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="tool-name-cell">
+                            <span class="tool-badge badge-chat">G</span>
+                            <span>Google Gemini</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="price-tag">19.99$ تقريباً / شهر</div>
+                        <div class="price-note">خطة Gemini Advanced عبر Google One AI Premium.[web:8][web:16]</div>
+                    </td>
+                    <td>
+                        <ul class="feature-list">
+                            <li>وصول إلى نموذج Gemini 1.5 Pro المتقدم مع تكامل عميق في Gmail وDocs وSheets.[web:8][web:16]</li>
+                            <li>مساحة تخزين سحابية إضافية في Google Drive وميزات ذكاء اصطناعي موسعة في تطبيقات جوجل.[web:16]</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <span class="free-limit">
+                            استخدام مجاني لنسخة ويب أساسية مع نماذج أخف وحدود على عدد الطلبات وحجم الملفات.[web:8]
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="tool-name-cell">
+                            <span class="tool-badge badge-chat">A</span>
+                            <span>Claude</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="price-tag">حوالي 18–20$ / شهر</div>
+                        <div class="price-note">خطة Pro للمستخدمين الأفراد.[web:9][web:17]</div>
+                    </td>
+                    <td>
+                        <ul class="feature-list">
+                            <li>وصول إلى نماذج Claude المتقدمة مع حدود استخدام أعلى وسياق أطول.[web:9][web:17]</li>
+                            <li>تحسين للاستخدام اليومي المهني مثل الكتابة والتحليل والعمل التعاوني.[web:9]</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <span class="free-limit">
+                            عدد محدود من المحادثات يومياً وإمكانيات أقل مقارنة بخطتي Pro وTeam.[web:9][web:17]
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="tool-name-cell">
+                            <span class="tool-badge badge-chat">D</span>
+                            <span>DeepSeek</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="price-tag">دفع حسب الاستهلاك</div>
+                        <div class="price-note">تسعير يعتمد على عدد التوكنات بدلاً من اشتراك شهري ثابت.[web:10][web:18]</div>
+                    </td>
+                    <td>
+                        <ul class="feature-list">
+                            <li>نماذج مفتوحة المصدر عالية الكفاءة مع أسعار منخفضة لكل مليون توكن مقارنة بالمنافسين.[web:10]</li>
+                            <li>مناسب للتكاملات والتطبيقات التي تحتاج إلى حجم استهلاك كبير بتكلفة أقل.[web:10]</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <span class="free-limit">
+                            توفر تجارب مجانية أو حدود استخدام مجانية محدودة؛ باقي الاستخدام يعتمد على الدفع مقابل التوكنات.[web:10]
+                        </span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- الجدول الثاني: إنشاء وتحرير الصور -->
+        <section class="table-card cat-2">
+            <h2 class="table-title">
+                <span class="table-icon">🖼️</span>
+                إنشاء وتحرير الصور بالذكاء الاصطناعي
+            </h2>
+            <table class="ai-table">
+                <thead>
+                <tr>
+                    <th>الأداة</th>
+                    <th>أقل باقة مدفوعة (شهرياً)</th>
+                    <th>الإمكانيات والخدمات</th>
+                    <th>حدود النسخة المجانية</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <div class="tool-name-cell">
+                            <span class="tool-badge badge-image">C</span>
+                            <span>Canva</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="price-tag">12.99$ تقريباً / شهر</div>
+                        <div class="price-note">خطة Canva Pro للأفراد.[web:11][web:19]</div>
+                    </td>
+                    <td>
+                        <ul class="feature-list">
+                            <li>ملايين العناصر والقوالب المميزة، أدوات تصميم متقدمة، ومساحة تخزين سحابية كبيرة.[web:11][web:19]</li>
+                            <li>أدوات ذكاء اصطناعي مثل إزالة الخلفية، توليد الصور، وتوسيع العناصر مع لوحة علامة تجارية.[web:11][web:19]</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <span class="free-limit">
+                            مكتبة محدودة من القوالب والصور، 5GB تخزين، وقيود على بعض ميزات الذكاء الاصطناعي المميزة.[web:11][web:19]
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="tool-name-cell">
+                            <span class="tool-badge badge-image">G</span>
+                            <span>Gamma AI (تصميم بصري)</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="price-tag">حوالي 10$ / شهر</div>
+                        <div class="price-note">خطة Pro للمستخدمين النشطين.[web:12]</div>
+                    </td>
+                    <td>
+                        <ul class="feature-list">
+                            <li>مولِّد شرائح وعناصر بصرية معتمدة على الذكاء الاصطناعي مع إمكانية تخصيص التصميم.[web:12]</li>
+                            <li>إنشاء عروض وبطاقات وصفحات تحتوي على صور ورسوم بيانية مدمجة.[web:12]</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <span class="free-limit">
+                            عدد محدود من إنشاءات الذكاء الاصطناعي والشرائح، وتحليلات أساسية فقط في الخطة المجانية.[web:12]
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="tool-name-cell">
+                            <span class="tool-badge badge-image">F</span>
+                            <span>Freepik</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="price-tag">حوالي 25$ / شهر</div>
+                        <div class="price-note">اشتراك مدفوع يمنح وصولاً إلى أدوات AI ومحتوى مميز.[web:13][web:21]</div>
+                    </td>
+                    <td>
+                        <ul class="feature-list">
+                            <li>مكتبة ضخمة من الصور والفيكتور والأيقونات والقوالب مع أدوات توليد صور وفيديو بالذكاء الاصطناعي.[web:13][web:21]</li>
+                            <li>إمكانية توليد عدد غير محدود من الصور لمشتركي الخطط المميزة مثل Premium+ وPro.[web:13]</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <span class="free-limit">
+                            استخدام محدود للمحتوى المجاني وبعض القيود على عدد تنزيلات الموارد وعمليات التوليد بالذكاء الاصطناعي.[web:13][web:21]
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="tool-name-cell">
+                            <span class="tool-badge badge-image">L</span>
+                            <span>lmarena (أدوات صور / نماذج مفتوحة)</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="price-tag">الأسعار تعتمد على المنصة</div>
+                        <div class="price-note">مشاريع ونماذج مفتوحة المصدر تُستضاف غالباً عبر واجهات أو منصات خارجية.[web:18]</div>
+                    </td>
+                    <td>
+                        <ul class="feature-list">
+                            <li>الوصول إلى نماذج رؤية حاسوبية وتوليد صور مفتوحة المصدر للاستخدام البحثي أو التطبيقي.[web:18]</li>
+                            <li>إمكانية تشغيل النماذج ذاتياً أو عبر خدمات سحابية مدفوعة حسب الاستهلاك.[web:18]</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <span class="free-limit">
+                            في حال التشغيل الذاتي يمكن أن تكون مجانية، أما المنصات المستضيفة فتفرض حدوداً مجانية مع تسعير إضافي لكل استخدام.[web:18]
+                        </span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- الجدول الثالث: أتمتة وإنشاء العروض التقديمية -->
+        <section class="table-card cat-3">
+            <h2 class="table-title">
+                <span class="table-icon">📊</span>
+                أتمتة وإنشاء العروض التقديمية
+            </h2>
+            <table class="ai-table">
+                <thead>
+                <tr>
+                    <th>الأداة</th>
+                    <th>أقل باقة مدفوعة (شهرياً)</th>
+                    <th>الإمكانيات والخدمات</th>
+                    <th>حدود النسخة المجانية</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <div class="tool-name-cell">
+                            <span class="tool-badge badge-present">G</span>
+                            <span>Gamma AI</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="price-tag">حوالي 10$ / شهر</div>
+                        <div class="price-note">خطة Pro للعروض التقديمية.[web:12]</div>
+                    </td>
+                    <td>
+                        <ul class="feature-list">
+                            <li>إنشاء عروض تقديمية وصفحات تفاعلية بسرعة من نصوص أو أفكار مكتوبة.[web:12]</li>
+                            <li>قوالب حديثة، تحليلات تفاعل، وميزات تعاونية في الخطط الأعلى.[web:12]</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <span class="free-limit">
+                            عدد محدود من الإنشاءات والشرائح مع ميزات تحليلات أساسية فقط في الخطة المجانية.[web:12]
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="tool-name-cell">
+                            <span class="tool-badge badge-present">C</span>
+                            <span>Canva (عروض تقديمية)</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="price-tag">12.99$ تقريباً / شهر</div>
+                        <div class="price-note">خطة Pro للأفراد.[web:11][web:19]</div>
+                    </td>
+                    <td>
+                        <ul class="feature-list">
+                            <li>قوالب عروض تقديمية جاهزة مع أداة "العرض السحري" لإنشاء الشرائح بالذكاء الاصطناعي.[web:11][web:19]</li>
+                            <li>تعاون فِرَقي، تسجيل عروض بالفيديو، ومكتبة وسائط مدمجة.[web:11][web:19]</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <span class="free-limit">
+                            قوالب أقل احترافية، عناصر مميزة مقفلة، وقيود على بعض أدوات الذكاء الاصطناعي في الخطة المجانية.[web:11][web:19]
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="tool-name-cell">
+                            <span class="tool-badge badge-present">B</span>
+                            <span>Beautiful.ai</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="price-tag">تقريباً من 12–15$ / شهر</div>
+                        <div class="price-note">أقرب خطة مدفوعة فردية حسب موقع التسعير الرسمي.[web:20]</div>
+                    </td>
+                    <td>
+                        <ul class="feature-list">
+                            <li>منصة متخصصة في عروض تقديمية ذكية تُعيد تنسيق الشرائح تلقائياً للحفاظ على التصميم الاحترافي.[web:20]</li>
+                            <li>قوالب ديناميكية، مكتبة وسائط، وخيارات مشاركة وتعاون للشركات في الخطط الأعلى.[web:20]</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <span class="free-limit">
+                            تجارب مجانية أو عدد محدود من العروض والشرائح قبل الحاجة للاشتراك المدفوع.[web:20]
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="tool-name-cell">
+                            <span class="tool-badge badge-present">K</span>
+                            <span>Kimi (كأداة تساعد في المحتوى)</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="price-tag">تسعير متدرج حسب الخطة</div>
+                        <div class="price-note">مُساعد ذكي مع خطط مدفوعة متعددة تتدرج حسب المزايا والاستخدام.[web:10]</div>
+                    </td>
+                    <td>
+                        <ul class="feature-list">
+                            <li>يساعد في توليد المحتوى النصي والأفكار التي يمكن تحويلها إلى شرائح أو عروض في أدوات أخرى.[web:10]</li>
+                            <li>قدرات تلخيص وتحليل تساعد في إعداد نصوص العروض التقديمية بشكل أسرع.[web:10]</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <span class="free-limit">
+                            حدود على عدد الطلبات اليومية وحجم المحتوى في النسخة المجانية، مع رفع الحدود في الخطط المدفوعة.[web:10]
+                        </span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+<!-- قسم عروض البرامج الخاصة - أضفه قبل </div> الأخير -->
+<div class="special-offers-section" style="
+    background: linear-gradient(135deg, #f8f9ff 0%, #e8f4f8 100%);
+    border-radius: 20px;
+    padding: 40px 30px;
+    margin-top: 50px;
+    border-top: 6px solid #667eea;
+">
+    <div class="section-header" style="
+        text-align: center;
+        margin-bottom: 35px;
+    ">
+        <h2 style="
+            font-size: 32px;
+            font-weight: 900;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        ">
+            🎁 عروض خاصة للمشاركين
+        </h2>
+        <p style="
+            font-size: 18px;
+            color: #7f8c8d;
+            font-weight: 500;
+            max-width: 600px;
+            margin: 0 auto;
+        ">
+            احصل على أدوات الذكاء الاصطناعي بأسعار مخفضة خاصة ومضمونة
+        </p>
+    </div>
+
+    <div class="offers-grid" style="
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+        gap: 25px;
+        margin-bottom: 30px;
+    ">
+        
+        <!-- عرض Perplexity -->
+        <div class="offer-card" style="
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+            border-left: 8px solid #667eea;
+            transition: transform 0.3s ease;
+        " onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+            <div class="offer-header" style="
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                margin-bottom: 20px;
+            ">
+                <div style="
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 15px;
+                    background: linear-gradient(135deg, #667eea, #764ba2);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                    font-size: 24px;
+                    font-weight: bold;
+                ">P</div>
+                <div>
+                    <h3 style="
+                        margin: 0 0 5px 0;
+                        font-size: 24px;
+                        font-weight: 800;
+                        color: #2c3e50;
+                    ">Perplexity Pro</h3>
+                    <div style="
+                        background: #667eea;
+                        color: white;
+                        padding: 4px 12px;
+                        border-radius: 20px;
+                        font-size: 13px;
+                        font-weight: 700;
+                        display: inline-block;
+                    ">مجاناً لمدة سنة</div>
+                </div>
+            </div>
+            
+            <div class="offer-details" style="
+                margin-bottom: 25px;
+                color: #546e7a;
+                line-height: 1.7;
+                font-size: 16px;
+            ">
+                <strong>كيف تحصل عليه:</strong><br>
+                إذا كان لديك حساب <strong>Paypal مفعّل من شهور</strong>، يمكنك تفعيل البرنامج <strong>مجاناً لمدة سنة كاملة</strong>.
+            </div>
+            
+            <a href="https://www.perplexity.ai/join/p/paypal-subscription" target="_blank" 
+               class="offer-button" style="
+                display: inline-block;
+                background: linear-gradient(135deg, #667eea, #764ba2);
+                color: white;
+                padding: 15px 30px;
+                border-radius: 12px;
+                text-decoration: none;
+                font-weight: 700;
+                font-size: 16px;
+                text-align: center;
+                transition: all 0.3s ease;
+                box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                🎁 تفعيل العرض المجاني
+            </a>
+        </div>
+
+        <!-- عرض Gemini -->
+        <div class="offer-card" style="
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+            border-left: 8px solid #2ecc71;
+            transition: transform 0.3s ease;
+        " onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+            <div class="offer-header" style="
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                margin-bottom: 20px;
+            ">
+                <div style="
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 15px;
+                    background: linear-gradient(135deg, #2ecc71, #27ae60);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                    font-size: 24px;
+                    font-weight: bold;
+                ">G</div>
+                <div>
+                    <h3 style="
+                        margin: 0 0 5px 0;
+                        font-size: 24px;
+                        font-weight: 800;
+                        color: #2c3e50;
+                    ">Google Gemini Pro</h3>
+                    <div style="
+                        background: #27ae60;
+                        color: white;
+                        padding: 4px 12px;
+                        border-radius: 20px;
+                        font-size: 13px;
+                        font-weight: 700;
+                        display: inline-block;
+                    ">5.64 د.ب / سنة لـ5 أجهزة</div>
+                </div>
+            </div>
+            
+            <div class="offer-details" style="
+                margin-bottom: 25px;
+                color: #546e7a;
+                line-height: 1.7;
+                font-size: 16px;
+            ">
+                <strong>كيف تحصل عليه:</strong><br>
+                اشتراك <strong>Google Gemini Pro</strong> لمدة <strong>سنة كاملة على 5 أجهزة</strong> بمبلغ <strong>5.64 دينار</strong>.<br>
+                
+            </div>
+            
+            <a href="https://digital-plus3.com/products/google-gemini" target="_blank" 
+               class="offer-button" style="
+                display: inline-block;
+                background: linear-gradient(135deg, #2ecc71, #27ae60);
+                color: white;
+                padding: 15px 30px;
+                border-radius: 12px;
+                text-decoration: none;
+                font-weight: 700;
+                font-size: 16px;
+                text-align: center;
+                transition: all 0.3s ease;
+                box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+            " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                 اطلب عبر هذا الموقع
+            </a>
+        </div>
+
+    </div>
+
+    </div>
+
+    </div>
+
+    <footer class="footer">
+        <p><strong>ملاحظة:</strong> الأسعار تقريبية بالدولار الأمريكي وقد تختلف حسب المنطقة والعروض والوقت.</p>
+        <p style="margin-top: 10px;">2025 - صفحة مقارنة أدوات الذكاء الاصطناعي</p>
+    </footer>
+</div>
+</body>
+</html>
